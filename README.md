@@ -1,69 +1,29 @@
-# janus-gateway
+# Project Template
 
-janus-gateway is a lightweight, macOS-native network egress controller designed for multi-uplink home environments.
-It provides secure SSH-based tunneling, optional WireGuard overlay, traffic shaping, multipath failover, and a clean separation of ingress/egress policies.
+This repository is a general-purpose project template.
 
-Janus — the Roman god of duality and portals — symbolizes the gateway’s role as a bidirectional traffic orchestrator between multiple ISPs, tunnels, and internal clients.
-
-## Features
-
-- macOS-native gateway mode (no containers required)
-- SSH tunnel endpoint (local-only or LAN-exposed)
-- Optional WireGuard overlay ("Hybrid Mode")
-- PF-based routing, NAT, and denylist firewall
-- Dual-uplink failover (Wi-Fi + Ethernet or dual routers)
-- Traffic shaping and prioritization
-- DNS leak protection for tunnel-based clients
-- Clean separation of configuration, scripts, and policies
-- Lightweight footprint suitable for M2 Mac Mini (8GB RAM)
-
-## Target Hardware
-
-- macOS (Apple Silicon)
-- Designed for Mac Mini M2 (8GB RAM)
-- Works with dual-router setups or multi-ISP homes
-
-## Quick Start
+## 1. Folder Structure (Non-Meta Repository)
 
 ```
-make init
-make enable-gateway
-make start-tunnel
+/guidelines/          # Policies, guidelines, and governance rules
+/modules/            # References to a repo (or their meta) repositories
+/content/             # Centralised content (CAS), assets and resources
+/docs/architecture/design/ # ADRs (Architecture Decision Records)
+/docs/technical/specs/     # TSDs (Technical Specification Documents)
+/ci/                  # CI/CD pipelines, policies, templates
 ```
+**Note:** The `/docs` directory is reserved for non-meta (i.e., project) repositories only.
 
-## Repository Layout
+## 2. Naming and Storage Conventions
 
-```
-.
-├── ci/
-├── config/
-│   ├── pf.conf
-│   ├── routing.conf
-│   ├── sshd_config
-│   └── wireguard/
-│       └── wg0.conf.example
-├── content/
-├── docs/
-│   ├── architecture/
-│   │   └── design/
-│   │       └── adr-001-naming-and-scope.md
-│   ├── guidelines/
-│   │   └── decisions/
-│   └── technical/
-│       └── specs/
-├── modules/
-├── scripts/
-│   ├── gateway-disable.sh
-│   ├── gateway-enable.sh
-│   ├── failover-monitor.sh
-│   ├── start-tunnel.sh
-│   ├── stop-tunnel.sh
-│   └── traffic-shape.sh
-├── src/
-├── Makefile
-└── README.md
-```
+| Type | Storage Location (Meta Repo) | File Name          | Title In-File      |
+| ---- | ---------------------------- | ------------------ | ------------------ |
+| ADR  | `/architecture/design/`      | `adr-000-title.md` | `ADR-000: Title`   |
+| GDR  | `/guidelines/decisions/`               | `gdr-000-title.md` | `GDR-000: Title`   |
+| TSD  | `/technical/specs/`          | `tsd-000-title.md` | `TSD-000: Title`   |
 
-## License
+## Separation of Concerns
 
-MIT
+- **GDRs**: Governance, policies, and organizational rules.
+- **ADRs**: High-level, deterministic architectural decisions (e.g., DAG/CD rules).
+- **TSDs**: Mutable, implementation-level technical specifications.
